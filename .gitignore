@@ -1,0 +1,15 @@
+# Cloudflare Pages generated output
+public/
+
+# Local secrets
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+
+# Local databases and caches
+*.db
+*.db-shm
+*.db-wal
+__pycache__/
+*.pyc
