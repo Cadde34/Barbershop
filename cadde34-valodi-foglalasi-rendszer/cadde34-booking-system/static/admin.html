@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CADDE 34 — Foglalások</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0a0a0a;color:#eaeaea;font-family:Montserrat,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit}.wrap{max-width:1440px;margin:0 auto;padding:32px 24px 64px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid rgba(197,160,89,.2)}.eyebrow{margin:0 0 8px;color:#c5a059;font-size:10px;letter-spacing:.35em;text-transform:uppercase}.top h1{font:600 clamp(2rem,5vw,3.5rem)/1 Cormorant Garamond,serif;margin:0}.top p{color:rgba(234,234,234,.55);margin:12px 0 0}.btn{border:1px solid #c5a059;background:#c5a059;color:#0a0a0a;padding:12px 18px;font:600 10px/1 Montserrat,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:.25s}.btn:hover{background:#d4af37;transform:translateY(-1px)}.btn.out{background:transparent;color:#c5a059}.btn.small{padding:9px 12px;font-size:9px}.btn.danger{border-color:#c96f6f;background:transparent;color:#e09393}.btn.success{border-color:#78b67e;background:transparent;color:#8fce94}.grid{display:grid;gap:24px}.panel{border:1px solid rgba(197,160,89,.18);background:#0d0d0d;padding:24px}.panel h2{font:600 28px/1.1 Cormorant Garamond,serif;margin:0 0 8px}.panel-sub{margin:0 0 20px;color:rgba(234,234,234,.5);font-size:13px;line-height:1.6}.filters{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:18px}.field label{display:block;margin-bottom:7px;color:rgba(234,234,234,.48);font-size:9px;letter-spacing:.16em;text-transform:uppercase}.field input,.field select{height:40px;background:#080808;border:1px solid rgba(197,160,89,.25);color:#eaeaea;padding:0 12px;font-family:inherit;outline:none}.field input:focus,.field select:focus{border-color:#c5a059}.table-wrap{overflow:auto;border:1px solid rgba(197,160,89,.14)}table{width:100%;border-collapse:collapse;min-width:1280px}th{background:rgba(197,160,89,.08);color:#c5a059;text-align:left;padding:13px 12px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}td{padding:13px 12px;border-top:1px solid rgba(234,234,234,.055);font-size:12px;vertical-align:top}tbody tr:hover{background:rgba(197,160,89,.025)}.ref{font-family:monospace;color:#c5a059;white-space:nowrap}.muted{color:rgba(234,234,234,.45)}.phone{white-space:nowrap}.message{max-width:260px;white-space:normal;line-height:1.5}.status{display:inline-flex;padding:6px 8px;border:1px solid currentColor;font-size:9px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}.status.confirmed{color:#8fce94}.status.pending{color:#d8b76f}.status.completed{color:#8aaed3}.status.cancelled,.status.no-show{color:#dd8585}.status.sent{color:#8fce94}.status.failed{color:#dd8585}.status.not_configured{color:#d8b76f}.status.sending,.status.pending-sms{color:#8aaed3}.actions{display:flex;gap:6px;flex-wrap:wrap;min-width:190px}.empty,.loading,.error{padding:32px;text-align:center;color:rgba(234,234,234,.5)}.error{color:#dd8585}.service-table{min-width:620px}.duration{width:90px}.save-state{font-size:12px;min-height:18px;margin-top:12px;color:#8fce94}.notice{padding:14px 16px;margin-bottom:24px;border-left:3px solid #c5a059;background:rgba(197,160,89,.06);color:rgba(234,234,234,.68);font-size:12px;line-height:1.6}.count{color:#c5a059;font-weight:600}.privacy{font-size:11px;color:rgba(234,234,234,.4);margin-top:18px;line-height:1.6}@media(max-width:720px){.wrap{padding:24px 14px 48px}.top{flex-direction:column}.panel{padding:18px}.top .btn{width:100%;justify-content:center}.filters>*{flex:1 1 140px}.filters .btn{flex:1 1 100%}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">CADDE 34 · Admin</p>
+      <h1>Foglalási táblázat</h1>
+      <p>A foglalások közös SQLite-adatbázisból jelennek meg. A lemondott időpont automatikusan újra szabaddá válik.</p>
+    </div>
+    <a class="btn out" href="/">Vissza a weboldalra</a>
+  </header>
+
+  <div class="notice"><strong>Biztonság:</strong> internetes közzététel előtt módosítsd az admin jelszót a <code>.env</code> fájlban vagy a <code>CADDE34_ADMIN_PASSWORD</code> környezeti változóval.</div>
+  <div class="notice" id="smsNotice"><strong>SMS:</strong> az értesítési beállítás ellenőrzése folyamatban...</div>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>Szolgáltatások időtartama</h2>
+      <p class="panel-sub">A foglalási rendszer ez alapján blokkolja a teljes időtartamot. Az értékek 30 perces lépésekben módosíthatók.</p>
+      <div class="table-wrap">
+        <table class="service-table">
+          <thead><tr><th>Szolgáltatás</th><th>Ár</th><th>Foglalási idő</th><th>Művelet</th></tr></thead>
+          <tbody id="serviceBody"><tr><td colspan="4" class="loading">Betöltés...</td></tr></tbody>
+        </table>
+      </div>
+      <div class="save-state" id="serviceState"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Rögzített időpontok <span class="count" id="bookingCount"></span></h2>
+      <p class="panel-sub">A „Lemondás” felszabadítja az időpontot. A „Teljesítve” és „Nem jelent meg” állapotok lezárják a foglalást.</p>
+      <div class="filters">
+        <div class="field"><label for="fromDate">Ettől</label><input id="fromDate" type="date" /></div>
+        <div class="field"><label for="toDate">Eddig</label><input id="toDate" type="date" /></div>
+        <div class="field"><label for="statusFilter">Állapot</label><select id="statusFilter"><option value="">Mind</option><option value="confirmed">Megerősítve</option><option value="pending">Függőben</option><option value="completed">Teljesítve</option><option value="cancelled">Lemondva</option><option value="no-show">Nem jelent meg</option></select></div>
+        <button class="btn" onclick="loadBookings()">Frissítés</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Azonosító</th><th>Dátum</th><th>Idő</th><th>Vendég</th><th>Telefon</th><th>Szolgáltatás</th><th>Ár</th><th>Megjegyzés</th><th>Állapot</th><th>Értesítés</th><th>Művelet</th></tr>
+          </thead>
+          <tbody id="bookingBody"><tr><td colspan="11" class="loading">Betöltés...</td></tr></tbody>
+        </table>
+      </div>
+      <p class="privacy">Ez az oldal személyes adatokat tartalmaz. Csak jogosult munkatársak számára legyen elérhető, és használj erős admin jelszót.</p>
+    </section>
+  </div>
+</main>
+<script>
+function esc(value){return String(value==null?'':value).replace(/[&<>'"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch];});}
+function isoLocal(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function statusLabel(status){return {pending:'Függőben',confirmed:'Megerősítve',completed:'Teljesítve',cancelled:'Lemondva','no-show':'Nem jelent meg'}[status]||status;}
+function notificationLabel(status){return {sent:'SMS elfogadva',failed:'SMS sikertelen',not_configured:'SMS nincs beállítva',sending:'SMS küldése',pending:'SMS függőben'}[status]||status||'—';}
+function formatPrice(value){return new Intl.NumberFormat('hu-HU').format(value)+' Ft';}
+function initDates(){var today=new Date();var end=new Date(today.getFullYear(),today.getMonth(),today.getDate()+60);document.getElementById('fromDate').value=isoLocal(today);document.getElementById('toDate').value=isoLocal(end);}
+async function fetchJson(url,options){var response=await fetch(url,options);var data=await response.json();if(!response.ok||!data.ok)throw new Error(data.message||data.error||'Hiba');return data;}
+async function loadServices(){var body=document.getElementById('serviceBody');try{var data=await fetchJson('/api/admin/services');body.innerHTML=data.services.map(function(s){return '<tr><td><strong>'+esc(s.name_hu)+'</strong><br><span class="muted">'+esc(s.name_en)+'</span></td><td>'+esc(formatPrice(s.price_huf))+'</td><td><select class="duration" id="dur-'+esc(s.id)+'">'+[30,60,90,120,150,180,210,240].map(function(v){return '<option value="'+v+'" '+(v===s.duration_minutes?'selected':'')+'>'+v+' perc</option>';}).join('')+'</select></td><td><button class="btn small" onclick="saveDuration(\''+esc(s.id)+'\')">Mentés</button></td></tr>';}).join('');}catch(error){body.innerHTML='<tr><td colspan="4" class="error">'+esc(error.message)+'</td></tr>';}}
+async function saveDuration(id){var state=document.getElementById('serviceState');var duration=Number(document.getElementById('dur-'+id).value);state.textContent='Mentés...';try{await fetchJson('/api/admin/services/'+encodeURIComponent(id),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({duration_minutes:duration})});state.textContent='Az időtartam elmentve. Az új foglalásoknál azonnal érvényes.';}catch(error){state.textContent='Hiba: '+error.message;state.style.color='#dd8585';}}
+async function loadBookings(){var body=document.getElementById('bookingBody');body.innerHTML='<tr><td colspan="11" class="loading">Betöltés...</td></tr>';var from=document.getElementById('fromDate').value;var to=document.getElementById('toDate').value;var filter=document.getElementById('statusFilter').value;try{var data=await fetchJson('/api/admin/bookings?from='+encodeURIComponent(from)+'&to='+encodeURIComponent(to));var smsNotice=document.getElementById('smsNotice');smsNotice.innerHTML=data.sms_configured?'<strong>SMS:</strong> a Twilio értesítés be van állítva. A sikeres foglalás után a rendszer automatikusan üzenetet küld a szalonnak.':'<strong>SMS:</strong> még nincs beállítva. A foglalások biztonságosan mentésre kerülnek, de az automatikus SMS-hez töltsd ki a <code>.env</code> fájl Twilio adatait.';var rows=data.bookings.filter(function(b){return !filter||b.status===filter;});document.getElementById('bookingCount').textContent='('+rows.length+')';if(!rows.length){body.innerHTML='<tr><td colspan="11" class="empty">A megadott időszakban nincs foglalás.</td></tr>';return;}body.innerHTML=rows.map(function(b){var actions='';if(b.status==='pending')actions+='<button class="btn small success" onclick="setStatus('+b.id+',\'confirmed\')">Megerősítés</button>';if(b.status==='pending'||b.status==='confirmed'){actions+='<button class="btn small success" onclick="setStatus('+b.id+',\'completed\')">Teljesítve</button><button class="btn small danger" onclick="setStatus('+b.id+',\'cancelled\')">Lemondás</button><button class="btn small danger" onclick="setStatus('+b.id+',\'no-show\')">Nem jött el</button>';}if(b.status==='cancelled'||b.status==='no-show')actions+='<button class="btn small" onclick="setStatus('+b.id+',\'confirmed\')">Visszaállítás</button>';if(b.notification_status!=='sent')actions+='<button class="btn small" onclick="retryNotification('+b.id+')">SMS újraküldése</button>';var notifyTitle=b.notification_error?' title="'+esc(b.notification_error)+'"':'';return '<tr><td class="ref">'+esc(b.reference)+'</td><td>'+esc(b.booking_date)+'</td><td>'+esc(b.start_time)+'–'+esc(b.end_time)+'<br><span class="muted">'+esc(b.duration_minutes)+' perc</span></td><td><strong>'+esc(b.customer_name)+'</strong></td><td class="phone"><a href="tel:'+esc(b.phone)+'">'+esc(b.phone)+'</a></td><td>'+esc(b.service_name_hu)+'</td><td>'+esc(b.price_hu)+'</td><td class="message">'+(b.message?esc(b.message):'<span class="muted">—</span>')+'</td><td><span class="status '+esc(b.status)+'">'+esc(statusLabel(b.status))+'</span></td><td><span class="status '+esc(b.notification_status)+'"'+notifyTitle+'>'+esc(notificationLabel(b.notification_status))+'</span><br><span class="muted">'+esc((b.notification_attempts||0)+' próbálkozás')+'</span></td><td><div class="actions">'+actions+'</div></td></tr>';}).join('');}catch(error){body.innerHTML='<tr><td colspan="11" class="error">'+esc(error.message)+'</td></tr>';}}
+async function setStatus(id,status){if(status==='cancelled'&&!confirm('Biztosan lemondod ezt a foglalást? Az időpont újra szabaddá válik.'))return;try{await fetchJson('/api/admin/bookings/'+id+'/status',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:status})});await loadBookings();}catch(error){alert('Hiba: '+error.message);}}
+async function retryNotification(id){try{await fetchJson('/api/admin/bookings/'+id+'/notify',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});alert('Az SMS-kérést a szolgáltató elfogadta.');await loadBookings();}catch(error){alert('Az SMS-küldés nem sikerült: '+error.message);await loadBookings();}}
+initDates();loadServices();loadBookings();
+</script>
+</body>
+</html>

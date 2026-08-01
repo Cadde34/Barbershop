@@ -1,0 +1,20 @@
+{
+  "host": "0.0.0.0",
+  "port": 8000,
+  "admin_username": "admin",
+  "admin_password": "C34-Pa6Mhp768npmqDhO!",
+  "opening_time": "09:00",
+  "closing_time": "19:00",
+  "opening_weekdays": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "slot_minutes": 30,
+  "minimum_notice_minutes": 0,
+  "max_booking_days": 60,
+  "business_phone": "+36705910745"
+}

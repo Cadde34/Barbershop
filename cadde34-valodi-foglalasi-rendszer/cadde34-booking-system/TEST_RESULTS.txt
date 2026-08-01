@@ -1,0 +1,19 @@
+CADDE 34 foglalási rendszer – automatikus teszt eredménye
+Dátum: 2026-08-01
+
+SIKERES:
+- Pontosan a négy hivatalos szolgáltatás érhető el, a helyes árakkal.
+- A szerver elindult és az elérhetőségi API válaszolt.
+- A foglalás bekerült a közös SQLite-adatbázisba.
+- Azonos időpontra érkező második foglalás 409 Conflict választ kapott.
+- Egy 60 perces foglalás a teljes időtartamot és a köztes 30 perces kezdést is blokkolta.
+- Két egyidejű foglalási kérésből pontosan egy sikerült, a másik ütközési hibát kapott.
+- A foglalt időpont a látogatói táblázatban foglaltnak jelenik meg.
+- Az admin felület visszaadta a mentett foglalásokat.
+- A lemondott időpont újra szabaddá vált.
+- Ha az időpontot közben más lefoglalta, a régi lemondott foglalás nem állítható vissza.
+- A szolgáltatási időtartam az admin felületről módosítható.
+- Twilio-adatok hiányában a foglalás akkor is elmentődik, és WhatsApp-tartaléklink készül.
+
+A teszt ismét futtatható:
+python3 test_booking_system.py
