@@ -2,7 +2,7 @@
   "host": "0.0.0.0",
   "port": 8000,
   "admin_username": "admin",
-  "admin_password": "C34-Pa6Mhp768npmqDhO!",
+  "admin_password": "CHANGE_ME_BEFORE_LOCAL_DEPLOYMENT",
   "opening_time": "09:00",
   "closing_time": "19:00",
   "opening_weekdays": [
