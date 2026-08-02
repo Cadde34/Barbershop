@@ -99,8 +99,6 @@
   .svc-card:hover .svc-desc{max-height:120px;opacity:1}
   .svc-foot{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(197,160,89,.2)}
   .svc-price{font-size:20px;color:var(--gold)}
-  .svc-dur{font-size:11px;color:rgba(234,234,234,.5)}
-  .svc-note{text-align:center;color:rgba(234,234,234,.62);font-size:13px;line-height:1.6;margin-top:28px}
 
   /* Gallery */
   .gal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;grid-auto-rows:180px}
@@ -122,17 +120,27 @@
   .bk-row .k{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(234,234,234,.4);width:90px;flex-shrink:0}
   .bk-row .v{color:var(--text);font-size:14px}
   .bk-note{font-size:12px;color:rgba(234,234,234,.5);margin-top:20px;line-height:1.5}
+  .bk-whatsapp-hint{margin-top:16px;display:flex;align-items:center;gap:10px;padding:12px 16px;border:1px solid rgba(37,211,102,.25);background:rgba(37,211,102,.06);border-radius:2px}
+  .bk-whatsapp-hint .wa-icon{font-size:20px;flex-shrink:0}
+  .bk-whatsapp-hint p{font-size:11px;color:rgba(234,234,234,.6);line-height:1.5}
   .bk-form{display:flex;flex-direction:column;gap:20px}
   .field label{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(234,234,234,.5);margin-bottom:8px}
   .field input,.field select,.field textarea{width:100%;background:var(--bg);border:1px solid rgba(197,160,89,.2);color:var(--text);font-family:inherit;font-size:14px;padding:12px 16px;outline:none;transition:border-color .3s}
   .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
   .field select option{background:var(--bg);color:var(--text)}
+
+  /* Time slots grid */
   .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
-  .slot{background:none;border:1px solid rgba(197,160,89,.2);color:rgba(234,234,234,.7);font-family:inherit;font-size:14px;padding:10px;cursor:pointer;transition:all .2s}
-  .slot:hover{border-color:var(--gold)}
-  .slot.sel{border-color:var(--gold);background:var(--gold);color:var(--bg)}
+  @media(max-width:480px){.slots{grid-template-columns:repeat(3,1fr)}}
+  .slot{background:none;border:1px solid rgba(197,160,89,.2);color:rgba(234,234,234,.7);font-family:inherit;font-size:13px;padding:10px 6px;cursor:pointer;transition:all .2s;text-align:center}
+  .slot:hover{border-color:var(--gold);color:var(--text)}
+  .slot.sel{border-color:var(--gold);background:var(--gold);color:var(--bg);font-weight:600}
   .slots-note{font-size:13px;color:rgba(234,234,234,.5);margin-top:8px}
+
   .bk-err{color:#e57373;font-size:13px}
+  .svc-note{text-align:center;color:rgba(234,234,234,.62);font-size:13px;line-height:1.6;margin-top:28px}
+
+  /* Success screen */
   .bk-success{text-align:center;max-width:560px;margin:0 auto}
   .bk-success .icon{width:72px;height:72px;margin:0 auto 24px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:32px}
   .bk-success h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);margin-bottom:12px}
@@ -175,44 +183,7 @@
   @media(min-width:640px){.foot-bottom{flex-direction:row;justify-content:space-between}}
   .foot-bottom p{font-size:12px;color:rgba(234,234,234,.4)}
 
-  .dlbar{position:fixed;bottom:16px;right:16px;z-index:60}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
-
-
-  /* Database-backed availability table */
-  .availability-shell{margin-top:10px;border:1px solid rgba(197,160,89,.2);overflow-x:auto;background:rgba(255,255,255,.015)}
-  .availability-shell[hidden]{display:none}
-  .availability-table{width:100%;border-collapse:collapse;min-width:500px}
-  .availability-table th{padding:13px 16px;text-align:left;background:rgba(197,160,89,.08);color:var(--gold);font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;border-bottom:1px solid rgba(197,160,89,.2)}
-  .availability-table td{padding:12px 16px;border-bottom:1px solid rgba(234,234,234,.06);font-size:14px;vertical-align:middle}
-  .availability-table tbody tr:last-child td{border-bottom:0}
-  .availability-table tbody tr{transition:background .25s ease,box-shadow .25s ease}
-  .availability-table tbody tr:hover{background:rgba(197,160,89,.035)}
-  .availability-table tbody tr.selected{background:rgba(197,160,89,.11);box-shadow:inset 3px 0 0 var(--gold)}
-  .availability-time{font-family:'Cormorant Garamond',serif;font-size:20px!important;color:var(--text);white-space:nowrap}
-  .availability-range{font-size:11px;color:rgba(234,234,234,.42);margin-left:5px}
-  .availability-status{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
-  .availability-status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px currentColor;opacity:.75}
-  .availability-status.free{color:#85c98a}
-  .availability-status.booked{color:#d47d7d}
-  .availability-status.unavailable{color:rgba(234,234,234,.42)}
-  .slot-select{min-width:132px;padding:10px 14px;border:1px solid rgba(197,160,89,.32);background:transparent;color:var(--gold);font:500 10px/1 'Montserrat',sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .25s ease,color .25s ease,border-color .25s ease,transform .25s ease}
-  .slot-select:hover:not(:disabled){background:var(--gold);color:var(--bg);transform:translateY(-1px)}
-  .slot-select.selected{background:var(--gold);color:var(--bg);border-color:var(--gold)}
-  .slot-select:disabled{cursor:not-allowed;color:rgba(234,234,234,.3);border-color:rgba(234,234,234,.1)}
-  .availability-loading{padding:26px 16px;text-align:center;color:rgba(234,234,234,.5);font-size:13px}
-  .availability-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:10px}
-  .availability-duration{font-size:12px;color:rgba(234,234,234,.5)}
-  .availability-refresh{background:none;border:0;color:var(--gold);font-family:inherit;font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:6px 0}
-  .availability-refresh:hover{text-decoration:underline}
-  .bk-submit[disabled]{opacity:.55;cursor:wait;transform:none;box-shadow:none}
-  .bk-ok{color:#85c98a;font-size:13px;line-height:1.5}
-  @media(max-width:639px){
-    .availability-table{min-width:440px}
-    .availability-table th,.availability-table td{padding:11px 12px}
-    .slot-select{min-width:116px;padding:9px 10px}
-  }
-
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
@@ -334,7 +305,6 @@
       </div>
     </div>
     <p class="svc-note" data-hu="A mosás és styling minden hajvágáshoz ingyenes." data-en="Hair washing and styling are included free of charge with every haircut.">A mosás és styling minden hajvágáshoz ingyenes.</p>
-
   </div>
 </section>
 
@@ -346,42 +316,47 @@
       <p data-hu="Minden kép egy szint — a mester munkája." data-en="Every image is a benchmark — the master's work.">Minden kép egy szint — a mester munkája.</p>
     </div>
     <div class="gal-grid">
-    <div class="gal-tile tall">
-      <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/4ff5721dd_generated_b37b6209.png" alt="Cadde 34 gallery" loading="lazy" />
-      <div class="gal-border"></div>
+      <div class="gal-tile tall">
+        <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/4ff5721dd_generated_b37b6209.png" alt="Cadde 34 gallery" loading="lazy" />
+        <div class="gal-border"></div>
+      </div>
+      <div class="gal-tile">
+        <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/e0a28da39_generated_57604e25.png" alt="Cadde 34 gallery" loading="lazy" />
+        <div class="gal-border"></div>
+      </div>
+      <div class="gal-tile">
+        <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/b1be84e97_generated_10ce3d2a.png" alt="Cadde 34 gallery" loading="lazy" />
+        <div class="gal-border"></div>
+      </div>
+      <div class="gal-tile tall">
+        <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/ae40661ef_generated_f19f607a.png" alt="Cadde 34 gallery" loading="lazy" />
+        <div class="gal-border"></div>
+      </div>
+      <div class="gal-tile">
+        <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/c30b9fc60_generated_41995b10.png" alt="Cadde 34 gallery" loading="lazy" />
+        <div class="gal-border"></div>
+      </div>
+      <div class="gal-tile">
+        <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/2df153723_generated_6286021b.png" alt="Cadde 34 gallery" loading="lazy" />
+        <div class="gal-border"></div>
+      </div>
     </div>
-    <div class="gal-tile ">
-      <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/e0a28da39_generated_57604e25.png" alt="Cadde 34 gallery" loading="lazy" />
-      <div class="gal-border"></div>
-    </div>
-    <div class="gal-tile ">
-      <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/b1be84e97_generated_10ce3d2a.png" alt="Cadde 34 gallery" loading="lazy" />
-      <div class="gal-border"></div>
-    </div>
-    <div class="gal-tile tall">
-      <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/ae40661ef_generated_f19f607a.png" alt="Cadde 34 gallery" loading="lazy" />
-      <div class="gal-border"></div>
-    </div>
-    <div class="gal-tile ">
-      <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/c30b9fc60_generated_41995b10.png" alt="Cadde 34 gallery" loading="lazy" />
-      <div class="gal-border"></div>
-    </div>
-    <div class="gal-tile ">
-      <img src="https://media.base44.com/images/public/6a6e34f9b67e317a2b2bc0bb/2df153723_generated_6286021b.png" alt="Cadde 34 gallery" loading="lazy" />
-      <div class="gal-border"></div>
-    </div></div>
   </div>
 </section>
 
+<!-- ======= BOOKING SECTION ======= -->
 <section id="booking" class="section">
   <div class="wrap">
     <div class="section-head">
       <p class="label" data-hu="Időpontfoglalás" data-en="Booking">Időpontfoglalás</p>
       <h2 data-hu="A Koncierge" data-en="The Concierge">A Koncierge</h2>
-      <p data-hu="Foglalja le székét. A foglalt időpontokat a rendszer valós időben kizárja." data-en="Reserve your chair. Booked time slots are blocked by the system in real time.">Foglalja le székét. A foglalt időpontokat a rendszer valós időben kizárja.</p>
+      <p data-hu="Foglalja le székét — a kérdőív kitöltése után azonnal WhatsApp üzenet nyílik a részletekkel." data-en="Reserve your chair — after filling the form, WhatsApp opens instantly with your details.">Foglalja le székét — a kérdőív kitöltése után azonnal WhatsApp üzenet nyílik a részletekkel.</p>
     </div>
+
     <div id="bkFormWrap">
       <div class="bk-grid">
+
+        <!-- Summary sidebar -->
         <div class="bk-summary">
           <h3 data-hu="Kiválasztott foglalás" data-en="Your selection">Kiválasztott foglalás</h3>
           <div class="bk-row"><span class="k" data-hu="Szolgáltatás" data-en="Service">Szolgáltatás</span><span class="v" id="sumSvc">—</span></div>
@@ -389,8 +364,13 @@
           <div class="bk-row"><span class="k" data-hu="Időpont" data-en="Time">Időpont</span><span class="v" id="sumTime">—</span></div>
           <div class="bk-row"><span class="k" data-hu="Név" data-en="Name">Név</span><span class="v" id="sumName">—</span></div>
           <div class="bk-row"><span class="k" data-hu="Telefon" data-en="Phone">Telefon</span><span class="v" id="sumPhone">—</span></div>
-          <p class="bk-note" data-hu="A foglalás először az adatbázisba kerül, így ugyanazt az időpontot más már nem foglalhatja le." data-en="The booking is saved to the database first, so nobody else can reserve the same time.">A foglalás először az adatbázisba kerül, így ugyanazt az időpontot más már nem foglalhatja le.</p>
+          <div class="bk-whatsapp-hint">
+            <span class="wa-icon">💬</span>
+            <p data-hu="A „Foglalás megerősítése" gomb megnyomása után automatikusan megnyílik a WhatsApp az előre kitöltött foglalási adatokkal." data-en="After pressing Confirm Booking, WhatsApp opens automatically with your pre-filled appointment details.">A „Foglalás megerősítése" gomb megnyomása után automatikusan megnyílik a WhatsApp az előre kitöltött foglalási adatokkal.</p>
+          </div>
         </div>
+
+        <!-- Form -->
         <div class="bk-form">
           <div class="field">
             <label data-hu="Teljes név" data-en="Full name">Teljes név</label>
@@ -402,7 +382,7 @@
           </div>
           <div class="field">
             <label data-hu="Szolgáltatás" data-en="Service">Szolgáltatás</label>
-            <select id="fSvc" onchange="handleServiceChange()">
+            <select id="fSvc" onchange="updSummary()">
               <option value="" data-hu="Válasszon szolgáltatást" data-en="Select a service">Válasszon szolgáltatást</option>
               <option value="haircut" data-hu="Hajvágás — 7 000 Ft" data-en="Haircut — HUF 7,000">Hajvágás — 7 000 Ft</option>
               <option value="style-cut" data-hu="Stílusvágás — 8 000 Ft" data-en="Style Cut — HUF 8,000">Stílusvágás — 8 000 Ft</option>
@@ -416,31 +396,17 @@
           </div>
           <div class="field">
             <label data-hu="Időpont" data-en="Time">Időpont</label>
-            <div class="availability-shell" id="availabilityShell" hidden>
-              <table class="availability-table" aria-label="Elérhető időpontok">
-                <thead>
-                  <tr>
-                    <th id="timeHead">Időpont</th>
-                    <th id="statusHead">Állapot</th>
-                    <th id="actionHead">Kiválasztás</th>
-                  </tr>
-                </thead>
-                <tbody id="availabilityBody"></tbody>
-              </table>
-            </div>
-            <p class="slots-note" id="slotsNote" data-hu="Először válasszon szolgáltatást és dátumot." data-en="Select a service and date first.">Először válasszon szolgáltatást és dátumot.</p>
-            <div class="availability-meta">
-              <span class="availability-duration" id="durationNote"></span>
-              <button type="button" class="availability-refresh" id="refreshAvailability" onclick="renderSlots()" hidden data-hu="Időpontok frissítése" data-en="Refresh availability">Időpontok frissítése</button>
-            </div>
+            <div class="slots" id="slots"></div>
+            <p class="slots-note" id="slotsNote" data-hu="Válasszon dátumot az időpontok megjelenítéséhez." data-en="Select a date to see available time slots.">Válasszon dátumot az időpontok megjelenítéséhez.</p>
           </div>
           <div class="field">
             <label data-hu="Üzenet (opcionális)" data-en="Message (optional)">Üzenet (opcionális)</label>
             <textarea id="fMsg" rows="2" placeholder="..."></textarea>
           </div>
           <p class="bk-err" id="bkErr"></p>
-          <button class="btn bk-submit" id="submitBookingBtn" onclick="submitBooking()" data-hu="Foglalás megerősítése" data-en="Confirm Booking">Foglalás megerősítése</button>
+          <button class="btn" onclick="submitBooking()" data-hu="Foglalás megerősítése — WhatsApp megnyitása" data-en="Confirm Booking — Open WhatsApp">Foglalás megerősítése — WhatsApp megnyitása</button>
         </div>
+
       </div>
     </div>
   </div>
@@ -502,276 +468,239 @@
 </footer>
 
 <script>
-  var lang="hu";
-  var selSlot="";
-  var currentAvailability=null;
+  /* ============================================================
+     LANGUAGE & NAV
+  ============================================================ */
+  var lang = "hu";
 
-  function tr(hu,en){return lang==="hu"?hu:en;}
-  function esc(value){
-    return String(value==null?"":value).replace(/[&<>'"]/g,function(ch){
-      return {"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch];
+  function tr(hu, en) { return lang === "hu" ? hu : en; }
+
+  function setLang(l) {
+    lang = l;
+    document.querySelectorAll("[data-hu]").forEach(function(el) {
+      var v = el.getAttribute("data-" + l);
+      if (v) el.textContent = v;
     });
+    document.getElementById("langHu").className = l === "hu" ? "on" : "";
+    document.getElementById("langEn").className = l === "en" ? "on" : "";
+    document.documentElement.lang = l;
+    updSummary();
+    if (document.getElementById("fDate").value) renderSlots();
   }
-  function setLang(l){
-    lang=l;
-    document.querySelectorAll("[data-hu]").forEach(function(el){
-      var v=el.getAttribute("data-"+l); if(v) el.textContent=v;
-    });
-    document.getElementById("langHu").className=l==="hu"?"on":"";
-    document.getElementById("langEn").className=l==="en"?"on":"";
-    document.documentElement.lang=l;
-    document.getElementById("timeHead").textContent=tr("Időpont","Time");
-    document.getElementById("statusHead").textContent=tr("Állapot","Status");
-    document.getElementById("actionHead").textContent=tr("Kiválasztás","Select");
-    var availabilityTable=document.querySelector(".availability-table");
-    if(availabilityTable){availabilityTable.setAttribute("aria-label",tr("Elérhető időpontok","Available appointments"));}
-    if(document.getElementById("fSvc")) updSummary();
-    if(currentAvailability){
-      document.getElementById("durationNote").textContent=tr(
-        "A kiválasztott szolgáltatás "+currentAvailability.duration_minutes+" percet foglal a naptárban.",
-        "The selected service reserves "+currentAvailability.duration_minutes+" minutes in the calendar."
-      );
-      renderAvailabilityTable();
-    }
+
+  function navTo(sel) {
+    document.querySelector(sel).scrollIntoView({ behavior: "smooth" });
+    document.getElementById("mMenu").classList.remove("open");
   }
-  function navTo(sel){document.querySelector(sel).scrollIntoView({behavior:"smooth"});document.getElementById("mMenu").classList.remove("open");}
-  function goBooking(serviceKey){
-    if(serviceKey){
-      var s=document.getElementById("fSvc");
-      if(s){s.value=serviceKey;handleServiceChange();}
+
+  function goBooking(serviceKey) {
+    if (serviceKey) {
+      var s = document.getElementById("fSvc");
+      if (s) { s.value = serviceKey; updSummary(); }
     }
     navTo("#booking");
   }
-  function toggleMenu(){document.getElementById("mMenu").classList.toggle("open");}
-  window.addEventListener("scroll",function(){var h=document.getElementById("hdr");h.className=window.scrollY>40?"scrolled":"";});
 
-  function localIsoDate(value){
-    var y=value.getFullYear();
-    var m=String(value.getMonth()+1).padStart(2,"0");
-    var d=String(value.getDate()).padStart(2,"0");
-    return y+"-"+m+"-"+d;
+  function toggleMenu() { document.getElementById("mMenu").classList.toggle("open"); }
+
+  window.addEventListener("scroll", function() {
+    document.getElementById("hdr").className = window.scrollY > 40 ? "scrolled" : "";
+  });
+
+  /* ============================================================
+     DATE BOUNDS
+  ============================================================ */
+  function localIsoDate(d) {
+    return d.getFullYear() + "-" +
+      String(d.getMonth() + 1).padStart(2, "0") + "-" +
+      String(d.getDate()).padStart(2, "0");
   }
-  function initDateBounds(){
-    var input=document.getElementById("fDate");
-    var today=new Date();
-    var max=new Date(today.getFullYear(),today.getMonth(),today.getDate()+60);
-    input.min=localIsoDate(today);
-    input.max=localIsoDate(max);
+
+  (function initDateBounds() {
+    var input = document.getElementById("fDate");
+    var today = new Date();
+    var max = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 60);
+    input.min = localIsoDate(today);
+    input.max = localIsoDate(max);
+  })();
+
+  /* ============================================================
+     TIME SLOTS  (09:00 – 18:30, every 30 min)
+  ============================================================ */
+  var ALL_SLOTS = [];
+  for (var h = 9; h < 19; h++) {
+    ALL_SLOTS.push((h < 10 ? "0" + h : h) + ":00");
+    ALL_SLOTS.push((h < 10 ? "0" + h : h) + ":30");
   }
-  function handleServiceChange(){
-    selSlot="";
+
+  var selSlot = "";
+
+  function renderSlots() {
+    var d = document.getElementById("fDate").value;
+    var note = document.getElementById("slotsNote");
+    var box = document.getElementById("slots");
+    selSlot = "";
     updSummary();
-    renderSlots();
-  }
 
-  async function renderSlots(){
-    var d=document.getElementById("fDate").value;
-    var service=document.getElementById("fSvc").value;
-    var note=document.getElementById("slotsNote");
-    var shell=document.getElementById("availabilityShell");
-    var body=document.getElementById("availabilityBody");
-    var refresh=document.getElementById("refreshAvailability");
-    var duration=document.getElementById("durationNote");
-    selSlot="";
-    currentAvailability=null;
-    updSummary();
-    duration.textContent="";
-    refresh.hidden=true;
-
-    if(!service||!d){
-      shell.hidden=true;
-      body.innerHTML="";
-      note.textContent=tr("Először válasszon szolgáltatást és dátumot.","Select a service and date first.");
+    if (!d) {
+      box.innerHTML = "";
+      note.textContent = tr("Válasszon dátumot az időpontok megjelenítéséhez.", "Select a date to see available time slots.");
       return;
     }
 
-    shell.hidden=false;
-    note.textContent=tr("Az elérhetőség ellenőrzése...","Checking availability...");
-    body.innerHTML='<tr><td colspan="3" class="availability-loading">'+esc(tr("Betöltés...","Loading..."))+'</td></tr>';
-
-    try{
-      var response=await fetch("/api/availability?date="+encodeURIComponent(d)+"&service="+encodeURIComponent(service),{headers:{"Accept":"application/json"}});
-      var data=await response.json();
-      if(!response.ok||!data.ok) throw new Error(data.message||"availability_error");
-      currentAvailability=data;
-      refresh.hidden=false;
-      duration.textContent=tr(
-        "A kiválasztott szolgáltatás "+data.duration_minutes+" percet foglal a naptárban.",
-        "The selected service reserves "+data.duration_minutes+" minutes in the calendar."
-      );
-      renderAvailabilityTable();
-    }catch(error){
-      currentAvailability=null;
-      body.innerHTML='<tr><td colspan="3" class="availability-loading">'+esc(tr("Az időpontok betöltése nem sikerült.","Could not load availability."))+'</td></tr>';
-      note.textContent=tr("Ellenőrizze, hogy a foglalási szerver fut-e, majd próbálja újra.","Check that the booking server is running, then try again.");
-    }
-  }
-
-  function renderAvailabilityTable(){
-    if(!currentAvailability) return;
-    var body=document.getElementById("availabilityBody");
-    var note=document.getElementById("slotsNote");
-    var slots=currentAvailability.slots||[];
-    if(currentAvailability.closed){
-      body.innerHTML='<tr><td colspan="3" class="availability-loading">'+esc(tr("Vasárnap zárva vagyunk.","We are closed on Sundays."))+'</td></tr>';
-      note.textContent=tr("Válasszon egy másik napot.","Please select another day.");
-      return;
-    }
-    if(currentAvailability.reason==="past_date"){
-      body.innerHTML='<tr><td colspan="3" class="availability-loading">'+esc(tr("Múltbeli nap nem foglalható.","Past dates cannot be booked."))+'</td></tr>';
-      note.textContent="";
-      return;
-    }
-    if(currentAvailability.reason==="too_far"){
-      body.innerHTML='<tr><td colspan="3" class="availability-loading">'+esc(tr("Erre a napra még nem lehet foglalni.","This date is not open for booking yet."))+'</td></tr>';
-      note.textContent="";
-      return;
-    }
-    if(!slots.length){
-      body.innerHTML='<tr><td colspan="3" class="availability-loading">'+esc(tr("Nincs megjeleníthető időpont.","No time slots to display."))+'</td></tr>';
-      note.textContent="";
+    // Sunday check
+    var dt = new Date(d + "T00:00:00");
+    if (dt.getDay() === 0) {
+      box.innerHTML = "";
+      note.textContent = tr("Vasárnap zárva vagyunk. Kérjük, válasszon másik napot.", "We are closed on Sundays. Please choose another day.");
       return;
     }
 
-    body.innerHTML=slots.map(function(slot){
-      var isSelected=selSlot===slot.time;
-      var statusClass="free";
-      var statusText=tr("Szabad","Available");
-      var buttonText=isSelected?tr("Kiválasztva","Selected"):tr("Kiválasztom","Select");
-      var disabled="";
-      if(!slot.available){
-        disabled=" disabled";
-        if(slot.reason==="booked"){
-          statusClass="booked";
-          statusText=tr("Foglalt","Booked");
-          buttonText=tr("Nem elérhető","Unavailable");
-        }else{
-          statusClass="unavailable";
-          statusText=tr("Nem foglalható","Unavailable");
-          buttonText=tr("Nem elérhető","Unavailable");
-        }
-      }
-      return '<tr class="'+(isSelected?'selected':'')+'">'
-        +'<td class="availability-time">'+esc(slot.time)+'<span class="availability-range">– '+esc(slot.end_time)+'</span></td>'
-        +'<td><span class="availability-status '+statusClass+'">'+esc(statusText)+'</span></td>'
-        +'<td><button type="button" class="slot-select '+(isSelected?'selected':'')+'" onclick="pickSlot(\''+esc(slot.time)+'\')"'+disabled+'>'+esc(buttonText)+'</button></td>'
-        +'</tr>';
+    // Past date check
+    var today = new Date();
+    today.setHours(0,0,0,0);
+    if (dt < today) {
+      box.innerHTML = "";
+      note.textContent = tr("Múltbeli dátumra nem lehet foglalni.", "Past dates cannot be booked.");
+      return;
+    }
+
+    note.textContent = tr("Válasszon időpontot:", "Select a time:");
+    box.innerHTML = ALL_SLOTS.map(function(s) {
+      return '<button class="slot" onclick="pickSlot(this,\'' + s + '\')">' + s + '</button>';
     }).join("");
-
-    var freeCount=slots.filter(function(slot){return slot.available;}).length;
-    note.textContent=freeCount
-      ?tr(freeCount+" szabad kezdési időpont.",freeCount+" available start times.")
-      :tr("Erre a napra már nincs szabad időpont.","There are no available times left for this day.");
   }
 
-  function pickSlot(timeValue){
-    if(!currentAvailability) return;
-    var slot=currentAvailability.slots.find(function(item){return item.time===timeValue;});
-    if(!slot||!slot.available) return;
-    selSlot=timeValue;
-    renderAvailabilityTable();
+  function pickSlot(btn, s) {
+    document.querySelectorAll(".slot").forEach(function(b) { b.classList.remove("sel"); });
+    btn.classList.add("sel");
+    selSlot = s;
     updSummary();
   }
 
-  function updSummary(){
-    var svc=document.getElementById("fSvc");
-    document.getElementById("sumSvc").textContent=svc.value?svc.options[svc.selectedIndex].textContent:"—";
-    document.getElementById("sumDate").textContent=document.getElementById("fDate").value||"—";
-    document.getElementById("sumTime").textContent=selSlot||"—";
-    document.getElementById("sumName").textContent=document.getElementById("fName").value||"—";
-    document.getElementById("sumPhone").textContent=document.getElementById("fPhone").value||"—";
+  /* ============================================================
+     SUMMARY PANEL
+  ============================================================ */
+  function updSummary() {
+    var svc = document.getElementById("fSvc");
+    document.getElementById("sumSvc").textContent = svc.value ? svc.options[svc.selectedIndex].textContent : "—";
+    document.getElementById("sumDate").textContent = document.getElementById("fDate").value || "—";
+    document.getElementById("sumTime").textContent = selSlot || "—";
+    document.getElementById("sumName").textContent = document.getElementById("fName").value || "—";
+    document.getElementById("sumPhone").textContent = document.getElementById("fPhone").value || "—";
   }
 
-  async function submitBooking(){
-    var n=document.getElementById("fName").value.trim();
-    var p=document.getElementById("fPhone").value.trim();
-    var svc=document.getElementById("fSvc");
-    var svKey=svc.value;
-    var d=document.getElementById("fDate").value;
-    var m=document.getElementById("fMsg").value.trim();
-    var err=document.getElementById("bkErr");
-    var button=document.getElementById("submitBookingBtn");
-    err.className="bk-err";
-    err.textContent="";
+  /* ============================================================
+     SUBMIT → WHATSAPP
+  ============================================================ */
+  // WhatsApp phone number (international format, no + or spaces)
+  var WA_NUMBER = "36705910745";
 
-    if(!n||!p||!svKey||!d||!selSlot){
-      err.textContent=tr("Kérjük, töltsön ki minden kötelező mezőt, és válasszon egy szabad időpontot.","Please complete all required fields and select an available time.");
+  function submitBooking() {
+    var n   = document.getElementById("fName").value.trim();
+    var p   = document.getElementById("fPhone").value.trim();
+    var svc = document.getElementById("fSvc");
+    var svKey = svc.value;
+    var sv  = svKey ? svc.options[svc.selectedIndex].textContent : "";
+    var d   = document.getElementById("fDate").value;
+    var m   = document.getElementById("fMsg").value.trim();
+    var err = document.getElementById("bkErr");
+    err.textContent = "";
+
+    // Validation
+    if (!n || !p || !svKey || !d || !selSlot) {
+      err.textContent = tr(
+        "Kérjük, töltse ki az összes kötelező mezőt, és válasszon időpontot.",
+        "Please fill in all required fields and select a time slot."
+      );
       return;
     }
 
-    button.disabled=true;
-    button.textContent=tr("Foglalás mentése...","Saving booking...");
-
-    try{
-      var response=await fetch("/api/bookings",{
-        method:"POST",
-        headers:{"Content-Type":"application/json","Accept":"application/json"},
-        body:JSON.stringify({name:n,phone:p,service:svKey,date:d,time:selSlot,message:m,language:lang})
-      });
-      var data=await response.json();
-      if(!response.ok||!data.ok){
-        if(response.status===409){
-          err.textContent=tr("Ez az időpont időközben foglalttá vált. Kérjük, válasszon másik szabad időpontot.","This time has just been booked. Please select another available time.");
-          await renderSlots();
-        }else{
-          err.textContent=data.message||tr("A foglalás mentése nem sikerült.","The booking could not be saved.");
-        }
-        return;
-      }
-
-      showConfirm(data.booking);
-    }catch(error){
-      err.textContent=tr("Nem sikerült kapcsolódni a foglalási szerverhez. Kérjük, próbálja újra.","Could not connect to the booking server. Please try again.");
-    }finally{
-      if(document.getElementById("submitBookingBtn")){
-        button.disabled=false;
-        button.textContent=tr("Foglalás megerősítése","Confirm Booking");
-      }
+    // Sunday guard
+    if (new Date(d + "T00:00:00").getDay() === 0) {
+      err.textContent = tr("Vasárnap zárva vagyunk.", "We are closed on Sundays.");
+      return;
     }
+
+    // Build WhatsApp message
+    var msg = (lang === "hu"
+      ? "🗓️ *Új foglalás — Cadde 34 Török Borbély*\n\n"
+      : "🗓️ *New Booking — Cadde 34 Turkish Barber*\n\n")
+      + tr("📛 Név: ", "📛 Name: ") + n + "\n"
+      + tr("📞 Telefon: ", "📞 Phone: ") + p + "\n"
+      + tr("✂️ Szolgáltatás: ", "✂️ Service: ") + sv + "\n"
+      + tr("📅 Dátum: ", "📅 Date: ") + d + "\n"
+      + tr("🕐 Időpont: ", "🕐 Time: ") + selSlot
+      + (m ? "\n" + tr("💬 Üzenet: ", "💬 Message: ") + m : "");
+
+    // Open WhatsApp
+    window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg), "_blank");
+
+    // Show confirmation screen
+    showConfirm(n, p, sv, d, selSlot);
   }
 
-  function showConfirm(booking){
-    var title=tr("Foglalása rögzítve","Booking saved");
-    var notification=booking.notification_status||"not_configured";
-    var sub;
-    if(notification==="sent"){
-      sub=tr(
-        "Az időpont bekerült a közös foglalási adatbázisba, ezért más már nem tudja lefoglalni. A szalon SMS-értesítését a szolgáltató elfogadta.",
-        "The appointment has been saved in the shared booking database, so nobody else can reserve it. The salon's SMS notification was accepted by the provider."
-      );
-    }else if(notification==="failed"){
-      sub=tr(
-        "Az időpont sikeresen elmentésre került, de az automatikus SMS-értesítés nem sikerült. A lenti WhatsApp-gombbal elküldheti tartalékként az adatokat.",
-        "The appointment was saved successfully, but the automatic SMS notification failed. You can use the WhatsApp button below as a backup."
-      );
-    }else{
-      sub=tr(
-        "Az időpont bekerült a közös foglalási adatbázisba, ezért más már nem tudja lefoglalni. Az automatikus SMS még nincs beállítva; a lenti WhatsApp-gomb tartalékként használható.",
-        "The appointment has been saved in the shared booking database, so nobody else can reserve it. Automatic SMS is not configured yet; the WhatsApp button below can be used as a backup."
-      );
-    }
-    var service=lang==="hu"?booking.service_name_hu:booking.service_name_en;
-    var price=lang==="hu"?booking.price_hu:booking.price_en;
-    var rows=[
-      [tr("Azonosító","Reference"),booking.reference],
-      [tr("Szolgáltatás","Service"),service+" — "+price],
-      [tr("Dátum","Date"),booking.booking_date],
-      [tr("Időpont","Time"),booking.start_time+"–"+booking.end_time],
-      [tr("Név","Name"),booking.customer_name],
-      [tr("Telefon","Phone"),booking.phone]
+  /* ============================================================
+     CONFIRMATION SCREEN
+  ============================================================ */
+  function showConfirm(n, p, sv, d, t) {
+    var title = tr("Foglalás Elküldve", "Booking Sent");
+    var sub = tr(
+      "A WhatsApp üzenet megnyílt a foglalás részleteivel. A borbély hamarosan visszaigazolja az időpontot.",
+      "WhatsApp opened with your booking details. The barber will confirm your appointment shortly."
+    );
+
+    var rows = [
+      [tr("Szolgáltatás", "Service"), sv],
+      [tr("Dátum", "Date"), d],
+      [tr("Időpont", "Time"), t],
+      [tr("Név", "Name"), n],
+      [tr("Telefon", "Phone"), p]
     ];
-    var dateCompact=booking.booking_date.replace(/-/g,"");
-    var startCompact=booking.start_time.replace(":","")+"00";
-    var endCompact=booking.end_time.replace(":","")+"00";
-    var gcal="https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent("Cadde 34 — "+service)
-      +"&dates="+dateCompact+"T"+startCompact+"/"+dateCompact+"T"+endCompact
-      +"&ctz=Europe%2FBudapest&details="+encodeURIComponent("Cadde 34 Török Borbély\n1085 Budapest, József körút 26.\nFoglalási azonosító: "+booking.reference);
-    var whatsapp=booking.whatsapp_url?'<a class="btn btn-out" href="'+esc(booking.whatsapp_url)+'" target="_blank" rel="noreferrer">'+esc(tr("WhatsApp-üzenet megnyitása","Open WhatsApp message"))+'</a>':"";
-    document.getElementById("bkFormWrap").innerHTML='<div class="bk-success"><div class="icon">&#10003;</div><h2>'+esc(title)+'</h2><p>'+esc(sub)+'</p><div class="bk-confirm">'+rows.map(function(r){return '<div class="bk-row"><span class="k">'+esc(r[0])+'</span><span class="v">'+esc(r[1])+'</span></div>';}).join("")+'</div><div class="bk-actions"><a class="btn" href="'+gcal+'" target="_blank" rel="noreferrer">'+esc(tr("Hozzáadás a Google Naptárhoz","Add to Google Calendar"))+'</a>'+whatsapp+'<button class="btn btn-out" onclick="location.reload()">'+esc(tr("Új foglalás","New booking"))+'</button></div></div>';
+
+    // Google Calendar link
+    var hh = parseInt(t.slice(0, 2), 10);
+    var mm = t.slice(3, 5);
+    var endH = hh + 1;
+    var dateStr = d.replace(/-/g, "");
+    var gcal = "https://calendar.google.com/calendar/render?action=TEMPLATE"
+      + "&text=" + encodeURIComponent("Cadde 34 — " + sv)
+      + "&dates=" + dateStr + "T" + (hh < 10 ? "0" + hh : hh) + mm + "00"
+      + "/" + dateStr + "T" + (endH < 10 ? "0" + endH : endH) + mm + "00"
+      + "&ctz=Europe%2FBudapest"
+      + "&details=" + encodeURIComponent("Cadde 34 Török Borbély\n1085 Budapest, József körút 26.\nTel: +36 70 591 0745");
+
+    // WhatsApp direct link (in case they want to send again)
+    var waLink = "https://wa.me/" + WA_NUMBER;
+
+    document.getElementById("bkFormWrap").innerHTML =
+      '<div class="bk-success">'
+      + '<div class="icon">&#10003;</div>'
+      + '<h2>' + title + '</h2>'
+      + '<p>' + sub + '</p>'
+      + '<div class="bk-confirm">'
+      + rows.map(function(r) {
+          return '<div class="bk-row"><span class="k">' + r[0] + '</span><span class="v">' + r[1] + '</span></div>';
+        }).join("")
+      + '</div>'
+      + '<div class="bk-actions">'
+      + '<a class="btn" href="' + gcal + '" target="_blank" rel="noreferrer">'
+        + tr("Hozzáadás a Google Naptárhoz", "Add to Google Calendar")
+        + '</a>'
+      + '<a class="btn btn-out" href="' + waLink + '" target="_blank" rel="noreferrer">'
+        + '💬 ' + tr("WhatsApp megnyitása", "Open WhatsApp")
+        + '</a>'
+      + '<button class="btn btn-out" onclick="location.reload()">'
+        + tr("Új foglalás", "New booking")
+        + '</button>'
+      + '</div>'
+      + '</div>';
   }
 
-  document.getElementById("yr").textContent=new Date().getFullYear();
-  initDateBounds();
+  /* ============================================================
+     INIT
+  ============================================================ */
+  document.getElementById("yr").textContent = new Date().getFullYear();
   setLang("hu");
 </script>
 </body>
